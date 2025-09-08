@@ -43,6 +43,7 @@ from textio.textsource.ocrtext import ocrtext
 from textio.textsource.textsourcebase import basetext
 from textio.textsource.filetrans import filetrans
 from textio.textsource.mssr import mssr
+from textio.textsource.vieetext import vieetext
 from gui.selecthook import hookselect
 from gui.translatorUI import TranslatorWindow
 import functools, gobject
@@ -987,6 +988,7 @@ class BASEOBJECT(QObject):
                 "texthook": texthook,
                 "filetrans": filetrans,
                 "mssr": mssr,
+                "viee": vieetext,
             }
             if use is None:
                 use = list(

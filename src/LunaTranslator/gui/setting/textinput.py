@@ -661,6 +661,7 @@ def setTabOne_lazy(self, basel: QVBoxLayout):
         ("texthook", "HOOK"),
         ("ocr", "OCR"),
         ("copy", "剪贴板"),
+        ("viee", "VIEE"),
     ]
     __ = []
     for key, name in _rank:

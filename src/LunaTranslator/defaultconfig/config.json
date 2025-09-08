@@ -1497,6 +1497,9 @@
         },
         "filetrans": {
             "use": false
+        },
+        "viee": {
+            "use": false
         }
     },
     "verticalocr": 2,
