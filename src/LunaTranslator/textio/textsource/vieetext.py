@@ -37,8 +37,8 @@ class vieetext(basetext):
         
         while not self.ending:
             self.update()
-            _, writable, __ = select.select([], [sock], [], 0)
-            if(writable):
+            _, writable, exceptional = select.select([], [sock], [sock], 0)
+            if(writable or exceptional):
                 err = sock.getsockopt(socket.SOL_SOCKET, socket.SO_ERROR)
                 if err == 0:
                     return True
@@ -60,7 +60,8 @@ class vieetext(basetext):
                 total_received += bytes_received
             except socket.error as e:
                 if(e.errno == errno.EINPROGRESS or e.errno == errno.WSAEWOULDBLOCK):
-                    continue;
+                    continue
+                raise e
         if(total_received < n):
             return None
         return buffer
