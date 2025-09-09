@@ -1497,7 +1497,7 @@ class BASEOBJECT(QObject):
         self.playtimemanager = playtimemanager()
         self.urlprotocol()
         self.serviceinit()
-        versioncheckthread()
+        #versioncheckthread()
 
     @property
     def focusWindow(self):
