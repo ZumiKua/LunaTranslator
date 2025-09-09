@@ -8,6 +8,7 @@ from gui.setting.textinput_ocr import getocrgrid_table
 from gui.gamemanager.dialog import dialog_savedgame_integrated
 from gui.dynalang import LLabel
 from textio.textsource.mssr import findallmodel, mssr
+from textio.textsource.vieetext import vieetext
 from gui.usefulwidget import (
     D_getsimplecombobox,
     D_getspinbox,
@@ -498,6 +499,9 @@ class MDLabel2(LinkLabel):
 
 def filetranslate(self):
     fuckyou = lambda _: '<a href="{}">{}</a>'.format(_, _)
+    def notifyvieesettingchanged(_):
+        if isinstance(gobject.base.textsource, vieetext):
+            gobject.base.textsource.setsettings()
     grids = [
         [
             dict(
@@ -567,6 +571,28 @@ def filetranslate(self):
                                 )
                             ),
                         )
+                    ],
+                ],
+            ),
+        ],
+        [
+            dict(
+                title="Viee",
+                grid=[
+                    [
+                        "等待时间_(ms)",
+                        getboxlayout(
+                            [
+                                D_getspinbox(
+                                    0,
+                                    10000,
+                                    globalconfig["sourcestatus2"]["viee"],
+                                    "waittime",
+                                    callback=notifyvieesettingchanged,
+                                ),
+                                2,
+                            ]
+                        ),
                     ],
                 ],
             ),

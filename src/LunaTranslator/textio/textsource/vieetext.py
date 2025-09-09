@@ -1,11 +1,14 @@
 from textio.textsource.textsourcebase import basetext
 from myutils.wrapper import threader
 import socket, time, errno, struct, json, select, os, gobject
+from myutils.config import globalconfig
 
 class vieetext(basetext):
     def init(self):
+        self.waitTime = 60000000;
         self.pendingText = ""
         self.pendingStartTime = 0
+        self.setsettings()
         self.startsql(gobject.gettranslationrecorddir("0_viee.sqlite"))
         self.tcpthread()
         pass
@@ -14,11 +17,12 @@ class vieetext(basetext):
         if(not self.pendingText):
             return
         current = time.monotonic_ns()
-        if(current - self.pendingStartTime > 60000000):
+        if(current - self.pendingStartTime > self.waitTime):
             self.dispatchtext(self.pendingText)
             self.pendingText = ""
 
-        
+    def setsettings(self):
+        self.waitTime = globalconfig["sourcestatus2"]["viee"]["waittime"] * 1000000;
         
     def addPendingText(self, text):
         if(not text.startswith(self.pendingText)):

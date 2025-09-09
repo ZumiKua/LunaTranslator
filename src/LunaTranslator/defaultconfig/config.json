@@ -1499,7 +1499,8 @@
             "use": false
         },
         "viee": {
-            "use": false
+            "use": false,
+            "waittime": 60
         }
     },
     "verticalocr": 2,
